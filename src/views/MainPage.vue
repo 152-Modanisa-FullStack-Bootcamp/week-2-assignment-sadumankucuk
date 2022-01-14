@@ -14,32 +14,32 @@
 </template>
 
 <script>
+import axios from "axios";
 import VideoCard from "@/components/VideoCard";
-import {mapState, mapActions} from 'vuex';
+
 
 export default {
   name: "MainPage",
   components: {
     VideoCard
   },
+  data() {
+    return {
+      videos: []
+    }
+  },
   methods: {
     //Routing using the params
     navigateToFavoritesPage() {
       this.$router.push("/favorites/bootcamp");
-    },
-    // map `this.fetchVideos()` to `this.$store.dispatch('fetchVideos')`
-    ...mapActions(["fetchVideos"]),
+    }
   },
-  computed: {
-    // map this.count to store.state.count
-    ...mapState(["videos"])
-  },
-  //Called synchronously after the instance is created
-  created() {
-    //Actions are triggered
-    //this.$store.dispatch('fetchVideos');
-    this.fetchVideos();
-  },
+  //Vue calls the mounted() hook when your component is added to the DOM
+  //HTTP request to fetch data
+  async mounted() {
+    //Accessed from base api url env variable
+    this.videos = await axios.get(`${process.env.VUE_APP_BASE_API_URL}/videos`).then(res => res.data);
+  }
 }
 </script>
 

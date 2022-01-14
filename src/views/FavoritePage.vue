@@ -9,15 +9,24 @@
 </template>
 
 <script>
+import axios from "axios";
 import VideoDetailCard from "@/components/VideoDetailCard";
-import {mapGetters} from "vuex";
 
 export default {
   name: "FavoritePage",
   components: {VideoDetailCard},
-  computed: {
-    // map `this.favoriteVideos` to `this.$store.getters.getFavoriteVideos`
-    ...mapGetters({favoriteVideos : "getFavoriteVideos"})
+  data() {
+    return {
+      favoriteVideos: []
+    }
+  },
+  //Vue calls the mounted() hook when your component is added to the DOM
+  //HTTP request to fetch data
+  async mounted() {
+    //Accessed from base api url env variable
+    //Favorite videos filtered from all data
+    this.favoriteVideos = await axios.get(`${process.env.VUE_APP_BASE_API_URL}/videos`)
+        .then(res => res.data.filter(video => video.favorite));
   }
 }
 </script>
