@@ -32,3 +32,12 @@ For the favorite page, You need to design a page as seen in the picture below.
 Favorite page should list the videos whose favorite field are set to true in the data.
 
 ![HomePage](./pictures/favorites-page.png)
+
+## vuex diagram and pages of the project
+
+![HomePage](./pictures/vuex-diagram.png)
+
+![HomePage](./pictures/main-page.png)
+
+![HomePage](./pictures/favorite-videos.png)
+
