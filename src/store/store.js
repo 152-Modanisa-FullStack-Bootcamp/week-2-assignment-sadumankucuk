@@ -5,7 +5,7 @@ import axios from "axios";
 //Calling the Vue.use() global method
 Vue.use(Vuex);
 
-const GET_VIDEOS = "getVideos";
+const SET_VIDEOS = "setVideos";
 
 const store = new Vuex.Store({
     state: {
@@ -19,7 +19,7 @@ const store = new Vuex.Store({
     },
     //change state
     mutations:{
-        [GET_VIDEOS](state, payload) {
+        [SET_VIDEOS](state, payload) {
             state.videos = payload;
         }
     },
@@ -32,7 +32,7 @@ const store = new Vuex.Store({
             await axios
                 .get(`${process.env.VUE_APP_BASE_API_URL}/videos`)
                 .then(res => {
-                    commit(GET_VIDEOS, res.data);
+                    commit(SET_VIDEOS, res.data);
                 })
                 .catch(error => {
                     console.error('err', error);
