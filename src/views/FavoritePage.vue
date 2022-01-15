@@ -10,7 +10,7 @@
 
 <script>
 import VideoDetailCard from "@/components/VideoDetailCard";
-import { mapGetters} from "vuex";
+import { mapGetters, mapActions} from "vuex";
 
 
 export default {
@@ -20,6 +20,15 @@ export default {
     // map `this.favoriteVideos` to `this.$store.getters.getFavoriteVideos`
     ...mapGetters({favoriteVideos: "getFavoriteVideos"})
   },
+  methods: {
+    // map `this.fetchVideos()` to `this.$store.dispatch('fetchVideos')`
+    ...mapActions(["fetchVideos"])
+  },
+  created() {
+    if(this.favoriteVideos.length === 0) {
+      this.fetchVideos()
+    }
+  }
 }
 </script>
 
